@@ -1,0 +1,160 @@
+.nav * {
+    color: #fff;    
+    background-color: #132839;
+}
+
+.nav_toggle {
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    align-items: center;
+    padding: 10px;
+    gap: 10px;
+    margin-top: 0;
+}
+
+.logo_tittle {
+    position: absolute;
+    margin: auto;
+    font-size: 26px;
+    left: 20px;
+}
+
+.nav_toggle li {
+    list-style-type: none;
+}
+
+.nav .nav_toggle a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.main {
+    margin: 10px auto;
+    width: 90%;
+    background-color: #078374;
+    color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.main h1 {
+    font-size: 23px;
+    margin: auto;
+    text-align: center;
+    color: #fff;
+    padding: 0px 10px 10px 0px;
+}
+
+.form {
+    display: grid;
+    grid-template-columns: 0.5fr 1.5fr;
+    gap: 5px;
+}
+
+.button {
+    grid-column: span 2;
+    /* flex: 0 0 calc(25% - 20px); */
+}
+
+.itemsFiltered {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    background-color: #0E2A1F;
+    padding: 4px;
+    border-radius: 10px;
+    font-size: 10px;
+    margin-bottom: 7px;
+    text-align: left;
+}
+
+.labelItems {
+    display: flex;
+    align-items: center;
+}
+
+.itemsSelectedTable {
+    display: grid;
+    margin: 13px auto;
+    width: 100%;
+    text-align: center;
+    background-color: #CDEED8;
+    color: #fff;
+    font-size: 12px;
+    height: 250px;
+    overflow-y: scroll;
+}
+
+.headerTable {
+    background-color: #180A1F;
+    max-height: 20px;
+    font-size: 11px;
+}
+
+.bodyTable {
+    color: #180A1F;
+}
+
+thead tr,
+tbody tr {
+    display: grid;
+    grid-template-columns: 1fr 2fr 0.75fr 0.75fr 1fr;
+    text-align: left;
+    padding-left: 4px;
+}
+
+.editAndDelete {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+td label {
+    display: flex;
+    align-items: center;
+    font-size: 9px;
+}
+
+tbody tr {
+    border-bottom: #0E2A1F solid 1px;
+}
+
+#inputSearch {
+    background-color: #E2A7C1;
+}
+
+input[type=text],
+input[type=number]{
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+     border-radius: 5px;
+     padding-left: 5px;
+}
+
+.footer {
+    position: relative;
+    display: flex;
+    flex: auto;
+    align-items: center;
+    justify-content: center;
+    bottom: 0;
+    width: 100%;
+    height: 20px;
+    background-color: #132839;
+    color: #fff;
+}
+
+.footer p {
+    margin: 10px;
+}
+
+@media only screen and (min-width: 560px) {
+    .main {
+        width: 40%;
+    }
+
+    .itemsFiltered {
+        font-size: 15px;
+        gap: 5px;
+    }
+}
