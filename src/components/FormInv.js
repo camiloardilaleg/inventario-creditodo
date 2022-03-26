@@ -9,7 +9,7 @@ import { GlobalContext } from '../context/GlobalState';
 
 export const FormInv = () => {
     
-    const { itemsSelected, addItem, itemToUpdate } = useContext(GlobalContext);
+    const { itemsSelected, addItem, itemToUpdate, removeAllItems } = useContext(GlobalContext);
     
     const [inputSearch, setInputSearch] = useState('');
     const [itemsFiltered, setItemsFiltered] = useState([]);
@@ -18,8 +18,8 @@ export const FormInv = () => {
     const [quantity, setQuantity] = useState(0);
     const [price, setPrice] = useState(0);
 
+    // Actualiza el componente una vez un cambio en itemToUpdate sea hecho.
     useEffect(() => {
-        console.log(`Estes es el item`, itemToUpdate)
         setCode(itemToUpdate.codigo);
         setProduct(itemToUpdate.name);
         setPrice(itemToUpdate.precio);
@@ -45,7 +45,7 @@ export const FormInv = () => {
         }
 
         if (e.target.name === 'codigo') { 
-            setCode(e.target.value);
+            e.target.value === '' ? setCode('') : setCode(parseInt(e.target.value));
         }
 
         if (e.target.name === 'producto') {
@@ -81,7 +81,8 @@ export const FormInv = () => {
                         'codigo': parseInt(code),
                         'name': String(product),
                         'cantidad': parseInt(quantity),
-                        'precio': parseFloat(price)
+                        'precio': parseFloat(price),
+                        'created at': new Date()
                         }
                     addItem(item);
                 } else {
@@ -95,6 +96,33 @@ export const FormInv = () => {
         }
         
         e.preventDefault();
+    }
+
+    const handleSumbit = (e) => {
+        
+        if (itemsSelected.length > 0){
+            if (window.confirm('¿Quieres enviar todo el inventario a la base de datos, el cuadro se limpiará?')) {
+                fetch("https://sheet.best/api/sheets/24c38baf-e24d-42e6-acf4-97d73a5944ae",
+                    {
+                        method: "POST",
+                        mode: "cors",
+                        headers: {
+                            "Content-type": "application/json"
+                        },
+                        body: JSON.stringify(itemsSelected),
+                    })
+                    .then((r) => r.json())
+                    .then((data) => {
+                        console.log(data);
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+                removeAllItems();
+            }
+        } else {
+            alert('No hay productos para enviar');
+        }   
     }
 
     return(
@@ -149,6 +177,7 @@ export const FormInv = () => {
                 <button className="button">Añadir</button>
             </form>
             <ItemsSelectedTable itemsSelected={itemsSelected}/>
+            <button onClick={handleSumbit} className="button-enviar">Enviar</button>
         </main>
     )
 }

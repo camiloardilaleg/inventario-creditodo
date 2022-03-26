@@ -57,6 +57,14 @@
     /* flex: 0 0 calc(25% - 20px); */
 }
 
+.button-enviar {
+    display: flex;
+    margin: auto;
+    width: 50%;
+    align-items: center;
+    justify-content: center;
+}
+
 .itemsFiltered {
     display: flex;
     flex-direction: column;

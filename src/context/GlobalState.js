@@ -1,8 +1,12 @@
 import { createContext, useReducer } from "react";
 import { appReducer } from "./appReducer";
 
+var localStorage = window.localStorage;
+var itemsSelected = localStorage.getItem('itemsSavedOnlocalStorage') ? JSON.parse(localStorage.getItem('itemsSavedOnlocalStorage')) : [];
+console.log(`objetos cargados en memoria: ${itemsSelected}`, itemsSelected);
+
 const initialState = {
-    itemsSelected: [],
+    itemsSelected,
     itemToUpdate: {
         codigo: 0,
         name: "",
@@ -39,13 +43,20 @@ export const GlobalProvider = ({ children }) => {
         })
     }
 
+    const removeAllItems = () => {
+        dispatch({
+            type: 'REMOVE_ALL_ITEMS'
+        })
+    }
+
     return (
         <GlobalContext.Provider value={{
             itemsSelected: state.itemsSelected,
             itemToUpdate: state.itemToUpdate,
             addItem,
             removeItem,
-            updateItem
+            updateItem,
+            removeAllItems
         }}>
             {children}
         </GlobalContext.Provider>
